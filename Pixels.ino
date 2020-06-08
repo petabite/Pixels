@@ -5,6 +5,9 @@
 #define NUM_LEDS 30
 #define PIN 10
 
+#define NEXT_ANIMATION_PIN 2
+#define ON_OFF_PIN 3
+
 boolean on;
 byte current_animation;
 void setup() {
@@ -24,10 +27,10 @@ void setup() {
     on = 1;
     EEPROM.update(1, on);
   // config interrupt pins
-  pinMode(2, INPUT_PULLUP);
-  attachInterrupt(digitalPinToInterrupt(2), nextAnimation, FALLING);
-  pinMode(3, INPUT_PULLUP);
-  attachInterrupt(digitalPinToInterrupt(3), toggleOnOff, FALLING);
+  pinMode(NEXT_ANIMATION_PIN, INPUT_PULLUP);
+  attachInterrupt(digitalPinToInterrupt(NEXT_ANIMATION_PIN), nextAnimation, FALLING);
+  pinMode(ON_OFF_PIN, INPUT_PULLUP);
+  attachInterrupt(digitalPinToInterrupt(ON_OFF_PIN), toggleOnOff, FALLING);
   // don't do anything if off
   while(!on);
   // loop the selected animation
